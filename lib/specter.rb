@@ -3,5 +3,11 @@ require 'specter/version'
 require 'clap'
 
 class Specter
-  # Your code goes here...
+  def patterns
+    @patterns ||= []
+  end
+
+  def filenames
+    Dir[*patterns]
+  end
 end
