@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+if ARGV.empty?
+  puts 'Usage: pattern ...'
+  exit
+end
+
+require 'specter'
+
+specter = Specter.new
+
+patterns = Clap.run ARGV
+
+specter.patterns.push(*patterns)
+
+if specter.filenames.any?
+  success = specter.run
+
+  exit 1 unless success
+end
