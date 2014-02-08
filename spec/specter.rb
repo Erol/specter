@@ -42,3 +42,7 @@ spec 'assert fails if the given object is false' do
     assert false
   end
 end
+
+spec 'refute passes if the given object is false' do
+  refute false
+end
