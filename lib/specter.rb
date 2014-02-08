@@ -2,6 +2,6 @@ require "specter/version"
 
 require 'clap'
 
-module Specter
+class Specter
   # Your code goes here...
 end
