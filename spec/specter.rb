@@ -32,3 +32,7 @@ spec 'raises fail if the block raises a different exception' do
     end
   end
 end
+
+spec 'assert passes if the given object is true' do
+  assert true
+end
