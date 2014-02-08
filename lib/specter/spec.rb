@@ -25,5 +25,13 @@ class Specter
     ensure
       Specter.current.delete :spec
     end
+
+    def pass
+      Specter.current[:file].pass
+    end
+
+    def fail(exception)
+      Specter.current[:file].fail exception
+    end
   end
 end
