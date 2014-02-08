@@ -3,6 +3,10 @@ require 'specter/version'
 require 'clap'
 
 class Specter
+  def self.current
+    Thread.current[:specter] ||= {}
+  end
+
   def patterns
     @patterns ||= []
   end
