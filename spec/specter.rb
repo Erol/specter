@@ -17,3 +17,10 @@ spec 'raises pass if the block raises the expected exception' do
     raise StandardError
   end
 end
+
+spec 'raises fail if the block does not raise an exception' do
+  raises Specter::MissingException do
+    raises StandardError do
+    end
+  end
+end
