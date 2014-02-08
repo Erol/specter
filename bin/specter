@@ -9,7 +9,7 @@ require 'specter'
 
 specter = Specter.new
 
-patterns = Clap.run ARGV
+patterns = Clap.run ARGV, {}
 
 specter.patterns.push(*patterns)
 
