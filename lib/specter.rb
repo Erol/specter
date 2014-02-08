@@ -10,6 +10,7 @@ class Specter
   class FailedAssert < Flunked; end
   class FailedRefute < Flunked; end
   class MissingException < Flunked; end
+  class DifferentException < Flunked; end
 
   def self.current
     Thread.current[:specter] ||= {}
@@ -49,6 +50,7 @@ module Kernel
 
   rescue Exception => exception
     flunk nil, Specter::MissingException unless exception
+    flunk nil, Specter::DifferentException unless exception.kind_of? expected
   end
 
   def flunk(message = nil, type = Specter::Flunked)

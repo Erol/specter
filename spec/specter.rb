@@ -24,3 +24,11 @@ spec 'raises fail if the block does not raise an exception' do
     end
   end
 end
+
+spec 'raises fail if the block raises a different exception' do
+  raises Specter::DifferentException do
+    raises StandardError do
+      raise Exception
+    end
+  end
+end
