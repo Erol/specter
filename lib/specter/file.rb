@@ -8,6 +8,14 @@ class Specter
       @filename = filename
     end
 
+    def passed
+      @passed ||= []
+    end
+
+    def passed?
+      not failed?
+    end
+
     def failed
       @failed ||= []
     end
