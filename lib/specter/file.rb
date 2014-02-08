@@ -34,6 +34,13 @@ class Specter
       end
     end
 
+    def pass
+      values = {file: Specter.current[:file], spec: Specter.current[:spec]}
+      passed << values
+
+      puts '.'
+    end
+
     def fail(exception)
       values = {file: Specter.current[:file]}
       failed << values
