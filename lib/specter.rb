@@ -1,4 +1,4 @@
-require "specter/version"
+require 'specter/version'
 
 require 'clap'
 
