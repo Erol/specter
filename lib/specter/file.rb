@@ -40,6 +40,10 @@ class Specter
           exit 1 if failed?
         end
       end
+
+      Process.wait
+
+      $?.success?
     end
 
     def pass

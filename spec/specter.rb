@@ -4,3 +4,10 @@ spec '#run returns a true value if none of the spec files failed' do
 
   assert specter.run
 end
+
+spec '#run returns a false value if any of the spec files failed' do
+  specter = Specter.new
+  specter.patterns.push 'spec/examples/fail.rb', 'spec/examples/pass.rb'
+
+  refute specter.run
+end
