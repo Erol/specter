@@ -42,7 +42,7 @@ class Specter
     end
 
     def fail(exception)
-      values = {file: Specter.current[:file]}
+      values = {file: Specter.current[:file], spec: Specter.current[:spec]}
       failed << values
 
       puts exception.inspect
