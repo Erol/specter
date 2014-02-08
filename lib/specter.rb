@@ -6,6 +6,10 @@ require 'specter/file'
 require 'specter/spec'
 
 class Specter
+  class Flunked < StandardError; end
+  class FailedAssert < Flunked; end
+  class FailedRefute < Flunked; end
+
   def self.current
     Thread.current[:specter] ||= {}
   end
