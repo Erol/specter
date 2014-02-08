@@ -3,6 +3,7 @@ require 'specter/version'
 require 'clap'
 
 require 'specter/file'
+require 'specter/spec'
 
 class Specter
   def self.current
