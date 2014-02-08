@@ -36,3 +36,9 @@ end
 spec 'assert passes if the given object is true' do
   assert true
 end
+
+spec 'assert fails if the given object is false' do
+  raises Specter::FailedAssert do
+    assert false
+  end
+end
