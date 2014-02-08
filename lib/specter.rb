@@ -23,3 +23,22 @@ class Specter
     statuses.all?
   end
 end
+
+module Kernel
+  private
+
+  def spec(description, &block)
+    Specter::Spec.new(description, &block).run
+  end
+
+  def assert(actual)
+    flunk actual, Specter::FailedAssert unless actual
+  end
+
+  def flunk(message = nil, type = Specter::Flunked)
+    exception = type.new message
+    exception.set_backtrace [caller[1]]
+
+    raise exception
+  end
+end
