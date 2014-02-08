@@ -2,6 +2,8 @@ require 'specter/version'
 
 require 'clap'
 
+require 'specter/file'
+
 class Specter
   def self.current
     Thread.current[:specter] ||= {}
