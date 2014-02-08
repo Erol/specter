@@ -12,5 +12,18 @@ class Specter
       @description = description
       @block = block
     end
+
+    def run
+      Specter.current.store :spec, self
+
+      block.call
+      pass
+
+    rescue StandardError => exception
+      fail exception
+
+    ensure
+      Specter.current.delete :spec
+    end
   end
 end
