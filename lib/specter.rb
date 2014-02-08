@@ -43,6 +43,13 @@ module Kernel
     flunk actual, Specter::FailedRefute if actual
   end
 
+  def raises(expected)
+    yield
+
+  rescue Exception => exception
+    flunk nil, Specter::Flunked unless exception
+  end
+
   def flunk(message = nil, type = Specter::Flunked)
     exception = type.new message
     exception.set_backtrace [caller[1]]

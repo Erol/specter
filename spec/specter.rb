@@ -11,3 +11,9 @@ spec '#run returns a false value if any of the spec files failed' do
 
   refute specter.run
 end
+
+spec 'raises pass if the block raises the expected exception' do
+  raises StandardError do
+    raise StandardError
+  end
+end
