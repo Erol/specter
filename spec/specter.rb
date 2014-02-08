@@ -46,3 +46,9 @@ end
 spec 'refute passes if the given object is false' do
   refute false
 end
+
+spec 'refute fails if the given object is true' do
+  raises Specter::FailedRefute do
+    refute true
+  end
+end
