@@ -4,6 +4,7 @@ require 'clap'
 
 require 'specter/file'
 require 'specter/spec'
+require 'specter/reporter'
 
 class Specter
   class Flunked < StandardError; end
