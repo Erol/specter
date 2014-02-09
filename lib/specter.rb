@@ -50,8 +50,10 @@ module Kernel
     yield
 
   rescue Exception => exception
-    flunk nil, Specter::MissingException unless exception
     flunk nil, Specter::DifferentException unless exception.kind_of? expected
+
+  ensure
+    flunk nil, Specter::MissingException unless exception
   end
 
   def flunk(message = nil, type = Specter::Flunked)
