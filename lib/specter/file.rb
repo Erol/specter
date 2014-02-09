@@ -50,14 +50,14 @@ class Specter
       values = {file: Specter.current[:file], spec: Specter.current[:spec]}
       passed << values
 
-      puts '.'
+      Specter::Reporter.progress values
     end
 
     def fail(exception)
       values = {file: Specter.current[:file], spec: Specter.current[:spec]}
       failed << values
 
-      puts exception.inspect
+      Specter::Reporter.progress values
     end
   end
 end
