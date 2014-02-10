@@ -58,3 +58,9 @@ spec 'flunk raises a default exception' do
     flunk 'Flunked'
   end
 end
+
+spec 'flunk raises the given exception' do
+  raises Specter::FailedAssert do
+    flunk 'FailedAssert', Specter::FailedAssert
+  end
+end
