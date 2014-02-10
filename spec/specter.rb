@@ -52,3 +52,9 @@ spec 'refute fails if the given object is true' do
     refute true
   end
 end
+
+spec 'flunk raises a default exception' do
+  raises Specter::Flunked do
+    flunk 'Flunked'
+  end
+end
