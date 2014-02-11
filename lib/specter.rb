@@ -7,7 +7,16 @@ require 'specter/spec'
 require 'specter/reporter'
 
 class Specter
-  class Flunked < StandardError; end
+  class Flunked < StandardError
+    def details=(values)
+      @details = values
+    end
+
+    def details
+      @details ||= {}
+    end
+  end
+
   class FailedAssert < Flunked; end
   class FailedRefute < Flunked; end
   class MissingException < Flunked; end
@@ -56,8 +65,9 @@ module Kernel
     flunk nil, Specter::MissingException unless exception
   end
 
-  def flunk(message = nil, type = Specter::Flunked)
+  def flunk(message = nil, type = Specter::Flunked, details = {})
     exception = type.new message
+    exception.details = details
     exception.set_backtrace [caller[1]]
 
     raise exception
