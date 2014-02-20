@@ -9,6 +9,12 @@ class Specter
 
     CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
 
+    def self.start
+    end
+
+    def self.finish
+    end
+
     def self.dot(text)
       print text
       STDOUT.flush

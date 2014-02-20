@@ -35,7 +35,12 @@ class Specter
   end
 
   def run
+    Specter::Reporter.start
+
     statuses = filenames.map { |filename| Specter::File.new(filename).run }
+
+    Specter::Reporter.finish
+
     statuses.all?
   end
 end
