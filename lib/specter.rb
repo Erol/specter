@@ -64,10 +64,9 @@ module Kernel
     yield
 
   rescue Exception => exception
-    flunk nil, Specter::DifferentException unless exception.kind_of? expected
-
   ensure
-    flunk nil, Specter::MissingException unless exception
+    flunk "expected #{expected} but nothing was raised", Specter::MissingException unless exception
+    flunk "expected #{expected} but #{exception.inspect} was raised", Specter::DifferentException unless exception.kind_of? expected
   end
 
   def flunk(message = nil, type = Specter::Flunked, details = {})
