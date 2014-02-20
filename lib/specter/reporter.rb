@@ -9,6 +9,11 @@ class Specter
 
     CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
 
+    def self.dot(text)
+      print text
+      STDOUT.flush
+    end
+
     def self.progress(values)
       filename = values[:file].filename
       description = values[:spec] && values[:spec].description
