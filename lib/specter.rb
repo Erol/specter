@@ -48,11 +48,11 @@ module Kernel
   end
 
   def assert(expression)
-    flunk "got #{expression.inspect} but expected true", Specter::FailedAssert unless expression
+    flunk "expected true but got #{expression.inspect}", Specter::FailedAssert unless expression
   end
 
   def refute(expression)
-    flunk "got #{expression.inspect} but expected false", Specter::FailedRefute if expression
+    flunk "expected false but got #{expression.inspect}", Specter::FailedRefute if expression
   end
 
   def raises(expected)
