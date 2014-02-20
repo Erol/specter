@@ -1,9 +1,11 @@
 class Specter
   module Reporter
-    COLORS = [
-      PASS = '32',
+    module Colors
+      DESC = '33'
+      PASS = '32'
       FAIL = '31'
-    ]
+      LINE = '34'
+    end
 
     CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
 
