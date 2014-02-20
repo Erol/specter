@@ -47,12 +47,12 @@ module Kernel
     Specter::Spec.new(description, &block).run
   end
 
-  def assert(actual)
-    flunk actual, Specter::FailedAssert unless actual
+  def assert(expression)
+    flunk "got #{expression.inspect} but expected true", Specter::FailedAssert unless expression
   end
 
-  def refute(actual)
-    flunk actual, Specter::FailedRefute if actual
+  def refute(expression)
+    flunk "got #{expression.inspect} but expected false", Specter::FailedRefute if expression
   end
 
   def raises(expected)
