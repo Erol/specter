@@ -24,9 +24,9 @@ class Specter
         puts
         puts
         puts colorize Colors::DESC, description
-        puts colorize Colors::FAIL, code(exception.backtrace)
-        puts colorize Colors::FAIL, exception.message
-        puts colorize Colors::LINE, exception.backtrace
+        puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
+        puts "  #{colorize Colors::FAIL, exception.message}"
+        puts "# #{colorize Colors::LINE, exception.backtrace}"
         puts
       else
         dot colorize Colors::PASS, '.'
