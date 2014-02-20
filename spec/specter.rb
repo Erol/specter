@@ -33,21 +33,21 @@ spec 'raises fail if the block raises a different exception' do
   end
 end
 
-spec 'assert passes if the given object is true' do
+spec 'assert passes if the given expression is true' do
   assert true
 end
 
-spec 'assert fails if the given object is false' do
+spec 'assert fails if the given expression is false' do
   raises Specter::FailedAssert do
     assert false
   end
 end
 
-spec 'refute passes if the given object is false' do
+spec 'refute passes if the given expression is false' do
   refute false
 end
 
-spec 'refute fails if the given object is true' do
+spec 'refute fails if the given expression is true' do
   raises Specter::FailedRefute do
     refute true
   end
