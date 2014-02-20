@@ -20,5 +20,14 @@ class Specter
     def self.colorize(color, text)
       "\e[#{color}m#{text}\e[0m"
     end
+
+    def self.code(backtrace)
+      begin
+        filename, line = backtrace.first.split(':')
+        CODE[filename][line.to_i - 1].strip
+      rescue
+        'N/A'
+      end
+    end
   end
 end
