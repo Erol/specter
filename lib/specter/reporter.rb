@@ -5,6 +5,8 @@ class Specter
       FAIL = '31'
     ]
 
+    CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
+
     def self.progress(values)
       filename = values[:file].filename
       description = values[:spec] && values[:spec].description
