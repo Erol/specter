@@ -19,10 +19,9 @@ class Specter
       description = values[:spec] && values[:spec].description
 
       if exception = values[:exception]
-        puts "#{colorize(FAIL, 'FAILED')} #{description || filename}"
-        puts "  #{exception.class}: #{exception.message}"
+        dot colorize Colors::FAIL, 'F'
       else
-        puts "#{colorize(PASS, 'PASSED')} #{description}"
+        dot colorize Colors::PASS, '.'
       end
     end
 
