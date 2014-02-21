@@ -1,5 +1,6 @@
 require 'specter/version'
 
+require 'benchmark'
 require 'clap'
 
 require 'specter/file'
@@ -26,12 +27,24 @@ class Specter
     Dir[*patterns]
   end
 
+  def runtimes
+    @runtimes
+  end
+
   def run
+    Specter.current.store :specter, self
+
+    statuses = []
+
     Specter::Reporter.start
 
-    statuses = filenames.map { |filename| Specter::File.new(filename).run }
+    @runtimes = Benchmark.measure do
+      statuses = filenames.map { |filename| Specter::File.new(filename).run }
+    end
 
     Specter::Reporter.finish
+
+    Specter.current.delete :specter
 
     statuses.all?
   end

@@ -13,6 +13,11 @@ class Specter
     end
 
     def self.finish
+      times = Specter.current[:specter].runtimes
+
+      puts
+      puts
+      puts "Finished in #{"%0.02f" % times.total} seconds"
     end
 
     def self.dot(text)
