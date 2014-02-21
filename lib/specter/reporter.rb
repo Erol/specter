@@ -21,7 +21,6 @@ class Specter
     end
 
     def self.progress(values)
-      filename = values[:file].filename
       description = values[:spec] && values[:spec].description
 
       if exception = values[:exception]
