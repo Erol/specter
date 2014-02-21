@@ -7,15 +7,7 @@ require 'specter/spec'
 require 'specter/reporter'
 
 class Specter
-  class Flunked < StandardError
-    def details=(values)
-      @details = values
-    end
-
-    def details
-      @details ||= {}
-    end
-  end
+  class Flunked < StandardError; end
 
   class FailedAssert < Flunked; end
   class FailedRefute < Flunked; end
@@ -69,9 +61,8 @@ module Kernel
     flunk "expected #{expected} but #{exception.inspect} was raised", Specter::DifferentException unless exception.kind_of? expected
   end
 
-  def flunk(message = nil, type = Specter::Flunked, details = {})
+  def flunk(message = nil, type = Specter::Flunked)
     exception = type.new message
-    exception.details = details
     exception.set_backtrace [caller[1]]
 
     raise exception
