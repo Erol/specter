@@ -11,3 +11,9 @@ scope 'a scope' do
     assert defined? @inside
   end
 end
+
+scope 'another scope' do
+  spec 'instance variables inside a different scope are undefined' do
+    refute defined? @inside
+  end
+end
