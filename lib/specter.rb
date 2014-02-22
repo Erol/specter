@@ -71,7 +71,7 @@ module Kernel
   end
 
   def refute(expression)
-    flunk "expected false but got #{expression.inspect}", Specter::FailedRefute if expression
+    flunk "expected: #{expression.inspect} is false", Specter::FailedRefute if expression
   end
 
   def raises(expected, message = nil)

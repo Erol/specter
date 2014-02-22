@@ -46,8 +46,8 @@ spec 'refute fails if the given expression is true' do
 end
 
 spec 'refute fails with failure message' do
-  raises Specter::FailedRefute, 'expected false but got "true"' do
-    refute "true"
+  raises Specter::FailedRefute, 'expected: true is false' do
+    refute true
   end
 end
 
