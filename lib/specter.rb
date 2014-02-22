@@ -65,13 +65,14 @@ module Kernel
     flunk "expected false but got #{expression.inspect}", Specter::FailedRefute if expression
   end
 
-  def raises(expected)
+  def raises(expected, message = nil)
     yield
 
   rescue Exception => exception
   ensure
     flunk "expected #{expected} but nothing was raised", Specter::MissingException unless exception
     flunk "expected #{expected} but #{exception.inspect} was raised", Specter::DifferentException unless exception.kind_of? expected
+    flunk "expected '#{message}' but got '#{exception.message}'", Specter::DifferentException if message && message != exception.message
   end
 
   def flunk(message = nil, type = Specter::Flunked)

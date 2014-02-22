@@ -58,6 +58,12 @@ spec 'assert fails if the given expression is false' do
   end
 end
 
+spec 'assert fails with failure message' do
+  raises Specter::FailedAssert, 'expected true but got nil' do
+    assert nil
+  end
+end
+
 spec 'refute passes if the given expression is false' do
   refute false
 end
@@ -65,6 +71,12 @@ end
 spec 'refute fails if the given expression is true' do
   raises Specter::FailedRefute do
     refute true
+  end
+end
+
+spec 'refute fails with failure message' do
+  raises Specter::FailedRefute, 'expected false but got "true"' do
+    refute "true"
   end
 end
 
