@@ -25,12 +25,12 @@ end
 
 spec 'assert fails if the given expression is false' do
   raises Specter::FailedAssert do
-    assert false
+    assert nil
   end
 end
 
 spec 'assert fails with failure message' do
-  raises Specter::FailedAssert, 'expected true but got nil' do
+  raises Specter::FailedAssert, 'expected: nil is true' do
     assert nil
   end
 end
