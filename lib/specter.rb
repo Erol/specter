@@ -4,6 +4,7 @@ require 'benchmark'
 require 'clap'
 
 require 'specter/file'
+require 'specter/scope'
 require 'specter/spec'
 require 'specter/reporter'
 
@@ -17,6 +18,10 @@ class Specter
 
   def self.current
     Thread.current[:specter] ||= {}
+  end
+
+  def self.scopes
+    current[:scopes] ||= []
   end
 
   def patterns
@@ -52,6 +57,10 @@ end
 
 module Kernel
   private
+
+  def scope(description = nil, &block)
+    Specter::Scope.new(description, &block).run
+  end
 
   def spec(description, &block)
     Specter::Spec.new(description, &block).run
