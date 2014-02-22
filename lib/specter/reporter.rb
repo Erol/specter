@@ -29,13 +29,13 @@ class Specter
       description = values[:spec] && values[:spec].description
 
       if exception = values[:exception]
-        dot colorize Colors::FAIL, 'F'
-
         puts
         puts
         puts colorize Colors::DESC, description
-        puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
-        puts "  #{colorize Colors::FAIL, exception.message}"
+        puts
+        puts "#{colorize Colors::FAIL, code(exception.backtrace)}"
+        puts "#{colorize Colors::FAIL, exception.message}"
+        puts
         puts "# #{colorize Colors::LINE, exception.backtrace}"
         puts
       else
@@ -52,7 +52,7 @@ class Specter
     def self.code(backtrace)
       begin
         filename, line = backtrace.first.split(':')
-        CODE[filename][line.to_i - 1].strip
+        "#{CODE[filename][line.to_i - 1].strip}"
       rescue
         'N/A'
       end
