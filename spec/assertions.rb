@@ -61,6 +61,20 @@ scope 'true expression' do
   end
 end
 
+scope 'false expression and predicate' do
+  spec 'refute passes' do
+    refute [1], :empty?
+  end
+end
+
+scope 'true expression and predicate' do
+  spec 'refute fails with a message' do
+    raises Specter::FailedRefute, 'expected: [] is not empty' do
+      refute [], :empty?
+    end
+  end
+end
+
 spec 'flunk raises a default exception' do
   raises Specter::Flunked do
     flunk 'Flunked'

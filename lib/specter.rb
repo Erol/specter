@@ -82,8 +82,20 @@ module Kernel
     end
   end
 
-  def refute(expression)
-    flunk "expected: #{expression.inspect} is false", Specter::FailedRefute if expression
+  def refute(*args)
+    expression = args.shift
+
+    if args.empty?
+      flunk "expected: #{expression.inspect} is false", Specter::FailedRefute if expression
+      return
+    end
+
+    predicate = args.shift
+
+    if args.empty?
+      flunk "expected: #{expression.inspect} is not #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedRefute if expression.send predicate
+      return
+    end
   end
 
   def raises(expected, message = nil)
