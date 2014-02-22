@@ -19,19 +19,23 @@ spec 'raises fail if the block raises a different exception' do
   end
 end
 
-spec 'assert passes if the given expression is true' do
-  assert true
-end
-
-spec 'assert fails if the given expression is false' do
-  raises Specter::FailedAssert do
-    assert nil
+scope 'true expression' do
+  spec 'assert passes' do
+    assert true
   end
 end
 
-spec 'assert fails with failure message' do
-  raises Specter::FailedAssert, 'expected: nil is true' do
-    assert nil
+scope 'false expression' do
+  spec 'assert fails' do
+    raises Specter::FailedAssert do
+      assert nil
+    end
+  end
+
+  spec 'assert has a failure message' do
+    raises Specter::FailedAssert, 'expected: nil is true' do
+      assert nil
+    end
   end
 end
 
