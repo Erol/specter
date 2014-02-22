@@ -27,12 +27,6 @@ end
 
 scope 'false expression' do
   spec 'assert fails' do
-    raises Specter::FailedAssert do
-      assert nil
-    end
-  end
-
-  spec 'assert has a failure message' do
     raises Specter::FailedAssert, 'expected: nil is true' do
       assert nil
     end
