@@ -66,8 +66,20 @@ module Kernel
     Specter::Spec.new(description, &block).run
   end
 
-  def assert(expression)
-    flunk "expected: #{expression.inspect} is true", Specter::FailedAssert unless expression
+  def assert(*args)
+    expression = args.shift
+
+    if args.empty?
+      flunk "expected: #{expression.inspect} is true", Specter::FailedAssert unless expression
+      return
+    end
+
+    predicate = args.shift
+
+    if args.empty?
+      flunk "expected: #{expression.inspect} is #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedAssert unless expression.send predicate
+      return
+    end
   end
 
   def refute(expression)

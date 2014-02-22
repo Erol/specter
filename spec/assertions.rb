@@ -33,6 +33,20 @@ scope 'false expression' do
   end
 end
 
+scope 'true expression and predicate' do
+  spec 'assert passes' do
+    assert [1], :any?
+  end
+end
+
+scope 'false expression and predicate' do
+  spec 'assert fails with a message' do
+    raises Specter::FailedAssert, 'expected: [1] is empty' do
+      assert [1], :empty?
+    end
+  end
+end
+
 spec 'refute passes if the given expression is false' do
   refute false
 end
