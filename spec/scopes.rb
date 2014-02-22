@@ -17,3 +17,11 @@ scope 'another scope' do
     refute defined? @inside
   end
 end
+
+spec 'instance variables outside a scope are defined' do
+  assert defined? @outside
+end
+
+spec 'instance variables inside a scope are undefined' do
+  refute defined? @inside
+end
