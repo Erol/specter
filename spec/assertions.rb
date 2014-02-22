@@ -47,19 +47,17 @@ scope 'false expression and predicate' do
   end
 end
 
-spec 'refute passes if the given expression is false' do
-  refute false
-end
-
-spec 'refute fails if the given expression is true' do
-  raises Specter::FailedRefute do
-    refute true
+scope 'false expression' do
+  spec 'refute passes' do
+    refute nil
   end
 end
 
-spec 'refute fails with failure message' do
-  raises Specter::FailedRefute, 'expected: true is false' do
-    refute true
+scope 'true expression' do
+  spec 'refute fails with a message' do
+    raises Specter::FailedRefute, 'expected: true is false' do
+      refute true
+    end
   end
 end
 
