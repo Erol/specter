@@ -26,3 +26,13 @@ spec '#run returns a false value if any of the spec files failed' do
 
   refute status
 end
+
+spec 'subject is not set' do
+  refute Specter.current[:subject]
+end
+
+subject Specter
+
+spec 'subject is set' do
+  assert Specter.current[:subject]
+end

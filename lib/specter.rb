@@ -58,6 +58,10 @@ end
 module Kernel
   private
 
+  def subject(subject)
+    Specter.current.store :subject, subject
+  end
+
   def scope(description = nil, &block)
     Specter::Scope.new(description, &block).run
   end
