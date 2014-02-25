@@ -3,7 +3,7 @@ class Specter
     module Colors
       DESC = '33'
       PASS = '32'
-      FAIL = '31'
+      FAIL = '91'
       LINE = '34'
     end
 
