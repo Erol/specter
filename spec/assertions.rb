@@ -21,6 +21,8 @@ spec 'fail if the block raises a different exception' do
   end
 end
 
+
+
 subject '#assert'
 
 scope 'true expression' do
@@ -51,6 +53,8 @@ scope 'false expression and predicate' do
   end
 end
 
+
+
 subject '#refute'
 
 scope 'false expression' do
@@ -80,6 +84,8 @@ scope 'true expression and predicate' do
     end
   end
 end
+
+
 
 subject '#flunk'
 
