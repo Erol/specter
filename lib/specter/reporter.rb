@@ -7,6 +7,8 @@ class Specter
       LINE = '34'
     end
 
+    SEPARATOR = "\u2b80"
+
     CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
 
     def self.start
@@ -26,7 +28,11 @@ class Specter
     end
 
     def self.progress(values)
-      description = values[:spec] && values[:spec].description
+      description = []
+      description << colorize('37;44', " #{values[:subject]} ") + colorize('34;43', SEPARATOR) if values[:subject]
+      description << colorize('37;43', " #{values[:scopes].map(&:description).join(" \u2022 ")} ") + colorize('33;41', SEPARATOR) unless values[:scopes].empty?
+      description << colorize('37;41', " #{values[:spec].description} " ) + colorize('31;49', SEPARATOR) if values[:spec]
+      description = description.join
 
       if exception = values[:exception]
         puts
