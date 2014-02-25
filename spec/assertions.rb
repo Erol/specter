@@ -19,14 +19,16 @@ spec 'raises fail if the block raises a different exception' do
   end
 end
 
+subject '#assert'
+
 scope 'true expression' do
-  spec 'assert passes' do
+  spec 'passes' do
     assert true
   end
 end
 
 scope 'false expression' do
-  spec 'assert fails with a message' do
+  spec 'fails with a message' do
     raises Specter::FailedAssert, 'expected: nil is true' do
       assert nil
     end
@@ -34,27 +36,29 @@ scope 'false expression' do
 end
 
 scope 'true expression and predicate' do
-  spec 'assert passes' do
+  spec 'passes' do
     assert [1], :any?
   end
 end
 
 scope 'false expression and predicate' do
-  spec 'assert fails with a message' do
+  spec 'fails with a message' do
     raises Specter::FailedAssert, 'expected: [1] is empty' do
       assert [1], :empty?
     end
   end
 end
 
+subject '#refute'
+
 scope 'false expression' do
-  spec 'refute passes' do
+  spec 'passes' do
     refute nil
   end
 end
 
 scope 'true expression' do
-  spec 'refute fails with a message' do
+  spec 'fails with a message' do
     raises Specter::FailedRefute, 'expected: true is false' do
       refute true
     end
@@ -62,13 +66,13 @@ scope 'true expression' do
 end
 
 scope 'false expression and predicate' do
-  spec 'refute passes' do
+  spec 'passes' do
     refute [1], :empty?
   end
 end
 
 scope 'true expression and predicate' do
-  spec 'refute fails with a message' do
+  spec 'fails with a message' do
     raises Specter::FailedRefute, 'expected: [] is not empty' do
       refute [], :empty?
     end
