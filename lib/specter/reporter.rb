@@ -30,7 +30,7 @@ class Specter
     def self.progress(values)
       if exception = values[:exception]
         description = []
-        description << colorize('37;44', " #{values[:subject]} ") + colorize('34;43', SEPARATOR) if values[:subject]
+        description << colorize('37;100', " #{values[:subject]} ") + colorize('90;43', SEPARATOR) if values[:subject]
         description << colorize('37;43', " #{values[:scopes].map(&:description).join(" \u2022 ")} ") + colorize('33;41', SEPARATOR) unless values[:scopes].empty?
         description << colorize('37;41', " #{values[:spec].description} " ) + colorize('31;49', SEPARATOR) if values[:spec]
         description << colorize('37;41', " #{exception.class} ") + colorize('31;49', SEPARATOR) if description.empty?
