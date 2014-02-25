@@ -28,24 +28,25 @@ class Specter
     end
 
     def self.progress(values)
-      description = []
-      description << colorize('37;44', " #{values[:subject]} ") + colorize('34;43', SEPARATOR) if values[:subject]
-      description << colorize('37;43', " #{values[:scopes].map(&:description).join(" \u2022 ")} ") + colorize('33;41', SEPARATOR) unless values[:scopes].empty?
-      description << colorize('37;41', " #{values[:spec].description} " ) + colorize('31;49', SEPARATOR) if values[:spec]
-      description = description.join
-
       if exception = values[:exception]
+        description = []
+        description << colorize('37;44', " #{values[:subject]} ") + colorize('34;43', SEPARATOR) if values[:subject]
+        description << colorize('37;43', " #{values[:scopes].map(&:description).join(" \u2022 ")} ") + colorize('33;41', SEPARATOR) unless values[:scopes].empty?
+        description << colorize('37;41', " #{values[:spec].description} " ) + colorize('31;49', SEPARATOR) if values[:spec]
+        description << colorize('37;41', " #{exception.class} ") + colorize('31;49', SEPARATOR) if description.empty?
+        description = description.join
+
         puts
         puts
         puts colorize Colors::DESC, description
         puts
-        puts "#{colorize Colors::FAIL, code(exception.backtrace)}"
-        puts "#{colorize Colors::FAIL, exception.message}"
+        puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
+        puts "  #{colorize Colors::FAIL, exception.message}"
         puts
-        puts "# #{colorize Colors::LINE, exception.backtrace}"
+        puts "#{colorize Colors::LINE, exception.backtrace.first}"
         puts
       else
-        dot colorize Colors::PASS, '.'
+        dot colorize Colors::PASS, "\u2022"
       end
     end
 
