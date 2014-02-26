@@ -87,7 +87,7 @@ module Kernel
 
     operands = args
 
-    flunk "expected: #{expression.inspect} #{predicate} #{operands.map { |operand| "#{operand.inspect}" }.join(', ')}", Specter::FailedAssert unless expression.send predicate, *operands
+    flunk "expected: #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", Specter::FailedAssert unless expression.send predicate, *operands
   end
 
   def refute(*args)
@@ -107,7 +107,7 @@ module Kernel
 
     operands = args
 
-    flunk "expected: not #{expression.inspect} #{predicate} #{operands.map { |operand| "#{operand.inspect}" }.join(', ')}", Specter::FailedRefute if expression.send predicate, *operands
+    flunk "expected: not #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", Specter::FailedRefute if expression.send predicate, *operands
   end
 
   def raises(expected, message = nil)
