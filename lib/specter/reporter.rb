@@ -6,7 +6,7 @@ class Specter
       FAIL = '91'
       LINE = '34'
 
-      SUBJECT = [37, 100]
+      SUBJECT = [30, 47]
       SCOPE = [37, 43]
       SPEC = [37, 41]
       DEFAULT = [39, 49]
@@ -50,7 +50,7 @@ class Specter
         puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
         puts "  #{colorize Colors::FAIL, exception.message}"
         puts
-        puts "#{colorize Colors::LINE, exception.backtrace.first}"
+        puts "  #{colorize Colors::LINE, exception.backtrace.first}"
         puts
       else
         dot colorize Colors::PASS, DOT
