@@ -78,7 +78,7 @@ class Specter
       background = nil
 
       until args.empty? do
-        text = "#{args.shift}"
+        text = String args.shift
         colors = args.shift
 
         next if text.empty?
