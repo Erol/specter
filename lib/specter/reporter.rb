@@ -5,6 +5,11 @@ class Specter
       PASS = '32'
       FAIL = '91'
       LINE = '34'
+
+      SUBJECT = [37, 100]
+      SCOPE = [37, 43]
+      SPEC = [37, 41]
+      DEFAULT = [39, 49]
     end
 
     SEPARATOR = "\u2b80"
