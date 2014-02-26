@@ -53,7 +53,7 @@ class Specter
         puts "#{colorize Colors::LINE, exception.backtrace.first}"
         puts
       else
-        dot colorize Colors::PASS, "\u2022"
+        dot colorize Colors::PASS, DOT
       end
     end
 
