@@ -25,3 +25,27 @@ end
 spec 'instance variables inside a scope are undefined' do
   refute defined? @inside
 end
+
+SomeClass = Struct.new :text
+
+scope 'a scope' do
+  local = SomeClass.new 'a scope'
+
+  scope 'a nested scope' do
+    spec 'local variables are cascaded' do
+      assert local, :==, SomeClass.new('a scope')
+    end
+  end
+
+  scope 'another nested scope' do
+    local = SomeClass.new 'another nested scope'
+
+    spec 'local variables can be redeclared' do
+      assert local, :==, SomeClass.new('another nested scope')
+    end
+  end
+
+  spec 'local variables are scoped' do
+    assert local, :==, SomeClass.new('a scope')
+  end
+end
