@@ -8,6 +8,7 @@ class Specter
     end
 
     SEPARATOR = "\u2b80"
+    DOT = "\u2022"
 
     CODE = Hash.new { |h, k| h[k] = ::File.readlines(k) }
 
