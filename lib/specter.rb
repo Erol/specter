@@ -111,7 +111,7 @@ module Kernel
   ensure
     flunk "expected: raise #{expected.inspect}, got nothing", Specter::MissingException unless exception
     flunk "expected: raise #{expected.inspect}, got #{exception.inspect}", Specter::DifferentException unless exception.kind_of? expected.class
-    flunk "expected: raise #{expected.inspect}, got #{exception.message}", Specter::DifferentException if message && message != exception.message
+    flunk "expected: raise #{expected.inspect}, got #{exception.inspect}", Specter::DifferentException if message && message != exception.message
   end
 
   def flunk(message = nil, type = Specter::Flunked)
