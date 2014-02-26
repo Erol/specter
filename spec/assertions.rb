@@ -99,6 +99,20 @@ scope 'true expression and predicate' do
   end
 end
 
+scope 'operator is false for operands' do
+  spec 'passes' do
+    refute 2, :==, 1
+  end
+end
+
+scope 'operator is true for operands' do
+  spec 'fails with a message' do
+    raises Specter::FailedRefute, 'expected: not 1 == 1' do
+      refute 1, :==, 1
+    end
+  end
+end
+
 
 
 subject '#flunk'

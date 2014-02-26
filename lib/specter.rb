@@ -104,6 +104,10 @@ module Kernel
       flunk "expected: #{expression.inspect} is not #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedRefute if expression.send predicate
       return
     end
+
+    operands = args
+
+    flunk "expected: not #{expression.inspect} #{predicate} #{operands.map { |operand| "#{operand.inspect}" }.join(', ')}", Specter::FailedRefute if expression.send predicate, *operands
   end
 
   def raises(expected, message = nil)
