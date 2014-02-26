@@ -35,16 +35,17 @@ class Specter
 
     def self.progress(values)
       if exception = values[:exception]
-        description = []
-        description << colorize('37;100', " #{values[:subject]} ") + colorize('90;43', SEPARATOR) if values[:subject]
-        description << colorize('37;43', " #{values[:scopes].map(&:description).join(" \u2022 ")} ") + colorize('33;41', SEPARATOR) unless values[:scopes].empty?
-        description << colorize('37;41', " #{values[:spec].description} " ) + colorize('31;49', SEPARATOR) if values[:spec]
-        description << colorize('37;41', " #{exception.class} ") + colorize('31;49', SEPARATOR) if description.empty?
-        description = description.join
+        subject = values[:subject]
+        scope = values[:scopes].map(&:description).join(" #{DOT} ")
+        spec = if values[:spec]
+                 values[:spec].description
+               else
+                 exception.class
+               end
 
         puts
         puts
-        puts colorize Colors::DESC, description
+        puts powerline subject, Colors::SUBJECT, scope, Colors::SCOPE, spec, Colors::SPEC
         puts
         puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
         puts "  #{colorize Colors::FAIL, exception.message}"
@@ -69,6 +70,33 @@ class Specter
       rescue
         'N/A'
       end
+    end
+
+    def self.powerline(*args)
+      string = ''
+
+      background = nil
+
+      until args.empty? do
+        text = "#{args.shift}"
+        colors = args.shift
+
+        next if text.empty?
+
+        if background
+          string += colorize("#{background - 10};#{colors.last}", SEPARATOR)
+        end
+
+        string += colorize(colors.join(';'), " #{text} ")
+
+        background = colors.last
+      end
+
+      if background
+        string += colorize("#{background - 10};49", SEPARATOR)
+      end
+
+      string
     end
   end
 end
