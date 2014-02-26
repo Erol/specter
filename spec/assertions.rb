@@ -53,6 +53,20 @@ scope 'false expression and predicate' do
   end
 end
 
+scope 'operator is true for operands' do
+  spec 'passes' do
+    assert 1, :==, 1
+  end
+end
+
+scope 'operator is false for operands' do
+  spec 'fails with a message' do
+    raises Specter::FailedAssert, 'expected: 2 == 1' do
+      assert 2, :==, 1
+    end
+  end
+end
+
 
 
 subject '#refute'

@@ -84,6 +84,10 @@ module Kernel
       flunk "expected: #{expression.inspect} is #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedAssert unless expression.send predicate
       return
     end
+
+    operands = args
+
+    flunk "expected: #{expression.inspect} #{predicate} #{operands.map { |operand| "#{operand.inspect}" }.join(', ')}", Specter::FailedAssert unless expression.send predicate, *operands
   end
 
   def refute(*args)
