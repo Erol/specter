@@ -17,11 +17,7 @@ class Specter
   class DifferentException < Flunked; end
 
   def self.current
-    Thread.current[:specter] ||= {}
-  end
-
-  def self.scopes
-    current[:scopes] ||= []
+    Thread.current[:specter] ||= {scopes: []}
   end
 
   def self.preserve(binding)

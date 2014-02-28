@@ -14,13 +14,13 @@ class Specter
     end
 
     def run
-      Specter.scopes.push self
+      Specter.current[:scopes].push self
 
       Specter.preserve block.binding do
         instance_eval(&block)
       end
 
-      Specter.scopes.pop
+      Specter.current[:scopes].pop
     end
   end
 end
