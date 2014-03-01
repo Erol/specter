@@ -8,9 +8,9 @@ def silent
 end
 
 spec 'require files' do
-  output = %x{./bin/specter -r spec/examples/require.rb spec/examples/pass.rb}
+  output = %x{./bin/specter -r spec/examples/files/require.rb spec/examples/files/*.rb}
 
-  assert output, :include?, 'Require Successful!'
+  assert output, :include?, 'This is a required file.'
 end
 
 spec '#run returns a true value if none of the spec files failed' do
