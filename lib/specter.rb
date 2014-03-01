@@ -35,6 +35,10 @@ class Specter
     end
   end
 
+  def requires
+    @requires ||= []
+  end
+
   def patterns
     @patterns ||= []
   end
