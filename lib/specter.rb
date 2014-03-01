@@ -48,7 +48,7 @@ class Specter
   end
 
   def filenames
-    Dir[*includes] - Dir[*excludes]
+    Dir[*includes] - Dir[*excludes] - requires
   end
 
   def runtimes
@@ -59,7 +59,7 @@ class Specter
     Specter.current.store :specter, self
 
     requires.each do |filename|
-      require filename
+      require ::File.join Dir.pwd, filename
     end
 
     statuses = []
