@@ -8,7 +8,7 @@ def silent
 end
 
 spec 'required files' do
-  output = %x{./bin/specter -r spec/examples/files/require.rb spec/examples/files/*.rb}
+  output = %x{./bin/specter -r spec/examples/files/required.rb spec/examples/files/*.rb}
 
   assert output, :include?, 'This is a required file.'
 end
