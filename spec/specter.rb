@@ -7,6 +7,12 @@ def silent
   result
 end
 
+spec 'included files' do
+  output = %x{./bin/specter spec/examples/files/*.rb}
+
+  assert output, :include?, 'This is an included file.'
+end
+
 spec 'required files' do
   output = %x{./bin/specter -r spec/examples/files/required.rb spec/examples/files/*.rb}
 
