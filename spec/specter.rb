@@ -7,7 +7,7 @@ def silent
   result
 end
 
-spec 'require files' do
+spec 'required files' do
   output = %x{./bin/specter -r spec/examples/files/require.rb spec/examples/files/*.rb}
 
   assert output, :include?, 'This is a required file.'
