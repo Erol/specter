@@ -5,6 +5,8 @@ if ARGV.empty?
   exit
 end
 
+$:.unshift File.join File.dirname(__FILE__), '..', 'lib'
+
 require 'specter'
 
 specter = Specter.new
