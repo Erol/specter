@@ -54,6 +54,10 @@ class Specter
   def run
     Specter.current.store :specter, self
 
+    requires.each do |filename|
+      require filename
+    end
+
     statuses = []
 
     Specter::Reporter.start

@@ -7,6 +7,12 @@ def silent
   result
 end
 
+spec 'require files' do
+  output = %x{./bin/specter -r spec/examples/require.rb spec/examples/pass.rb}
+
+  assert output, :include?, 'Require Successful!'
+end
+
 spec '#run returns a true value if none of the spec files failed' do
   status = silent do
     specter = Specter.new
