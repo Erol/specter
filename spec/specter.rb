@@ -19,6 +19,12 @@ spec 'required files' do
   assert output, :include?, 'This is a required file.'
 end
 
+spec 'excluded files' do
+  output = %x{./bin/specter -e spec/examples/files/excluded.rb spec/examples/files/*.rb}
+
+  refute output, :include?, 'This is an excluded file.'
+end
+
 spec '#run returns a true value if none of the spec files failed' do
   status = silent do
     specter = Specter.new

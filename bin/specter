@@ -12,7 +12,8 @@ require 'specter'
 specter = Specter.new
 
 patterns = Clap.run ARGV, {
-  '-r' => lambda { |filename| specter.requires.push File.join Dir.pwd, filename }
+  '-r' => lambda { |filename| specter.requires.push File.join Dir.pwd, filename },
+  '-e' => lambda { |pattern| specter.excludes.push pattern }
 }
 
 specter.patterns.push(*patterns)

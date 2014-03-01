@@ -39,12 +39,16 @@ class Specter
     @requires ||= []
   end
 
+  def excludes
+    @excludes ||= []
+  end
+
   def patterns
     @patterns ||= []
   end
 
   def filenames
-    Dir[*patterns]
+    Dir[*patterns] - Dir[*excludes]
   end
 
   def runtimes
