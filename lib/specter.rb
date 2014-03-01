@@ -43,12 +43,12 @@ class Specter
     @excludes ||= []
   end
 
-  def patterns
-    @patterns ||= []
+  def includes
+    @includes ||= []
   end
 
   def filenames
-    Dir[*patterns] - Dir[*excludes]
+    Dir[*includes] - Dir[*excludes]
   end
 
   def runtimes

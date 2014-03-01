@@ -16,7 +16,7 @@ patterns = Clap.run ARGV, {
   '-e' => lambda { |pattern| specter.excludes.push pattern }
 }
 
-specter.patterns.push(*patterns)
+specter.includes.push(*patterns)
 
 if specter.filenames.any?
   success = specter.run
