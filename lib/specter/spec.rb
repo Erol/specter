@@ -14,6 +14,8 @@ class Specter
     end
 
     def run
+      Specter.current[:prepares].each(&:call)
+
       Specter.preserve block.binding do
         begin
           Specter.current.store :spec, self

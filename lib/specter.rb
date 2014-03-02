@@ -17,7 +17,7 @@ class Specter
   class DifferentException < Flunked; end
 
   def self.current
-    Thread.current[:specter] ||= {scopes: []}
+    Thread.current[:specter] ||= {scopes: [], prepares: []}
   end
 
   def self.preserve(binding)
@@ -91,6 +91,10 @@ module Kernel
 
   def spec(description, &block)
     Specter::Spec.new(description, &block).run
+  end
+
+  def prepare(&block)
+    Specter.current[:prepares].push block
   end
 
   def assert(*args)
