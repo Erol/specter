@@ -14,7 +14,15 @@ class Specter
     end
 
     def run
-      Specter.current[:prepares].each(&:call)
+      scope = Specter.current[:scopes].last
+      prepares = Specter.current[:prepares]
+      prepares.each do |block|
+        if scope
+          scope.instance_eval(&block)
+        else
+          block.call
+        end
+      end
 
       Specter.preserve block.binding do
         begin
