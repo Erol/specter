@@ -94,7 +94,12 @@ module Kernel
   end
 
   def prepare(&block)
-    Specter.current[:prepares].push block
+    prepares = if scope = Specter.current[:scopes].last
+      scope.prepares
+    else
+      Specter.current[:prepares]
+    end
+    prepares.push block
   end
 
   def assert(*args)

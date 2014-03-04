@@ -15,7 +15,10 @@ class Specter
 
     def run
       scope = Specter.current[:scopes].last
-      prepares = Specter.current[:prepares]
+
+      prepares = []
+      prepares += Specter.current[:prepares]
+      prepares += Specter.current[:scopes].map(&:prepares).flatten
       prepares.each do |block|
         if scope
           scope.instance_eval(&block)

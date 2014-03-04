@@ -8,6 +8,10 @@ class Specter
       @block
     end
 
+    def prepares
+      @prepares ||= []
+    end
+
     def initialize(description = nil, &block)
       @description = description
       @block = block
