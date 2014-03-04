@@ -36,15 +36,15 @@ class Specter
   end
 
   def requires
-    @requires ||= []
+    @_requires ||= []
   end
 
   def excludes
-    @excludes ||= []
+    @_excludes ||= []
   end
 
   def includes
-    @includes ||= []
+    @_includes ||= []
   end
 
   def filenames
@@ -52,7 +52,7 @@ class Specter
   end
 
   def runtimes
-    @runtimes
+    @_runtimes
   end
 
   def run
@@ -66,7 +66,7 @@ class Specter
 
     Specter::Reporter.start
 
-    @runtimes = Benchmark.measure do
+    @_runtimes = Benchmark.measure do
       statuses = filenames.map { |filename| Specter::File.new(filename).run }
     end
 
