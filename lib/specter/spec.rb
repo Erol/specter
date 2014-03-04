@@ -1,16 +1,16 @@
 class Specter
   class Spec
     def description
-      @description
+      @_description
     end
 
     def block
-      @block
+      @_block
     end
 
     def initialize(description, &block)
-      @description = description
-      @block = block
+      @_description = description
+      @_block = block
     end
 
     def run
