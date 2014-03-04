@@ -1,15 +1,15 @@
 class Specter
   class File
     def filename
-      @filename
+      @_filename
     end
 
     def initialize(filename)
-      @filename = filename
+      @_filename = filename
     end
 
     def passed
-      @passed ||= []
+      @_passed ||= []
     end
 
     def passed?
@@ -17,7 +17,7 @@ class Specter
     end
 
     def failed
-      @failed ||= []
+      @_failed ||= []
     end
 
     def failed?
