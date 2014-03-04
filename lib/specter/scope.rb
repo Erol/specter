@@ -1,20 +1,20 @@
 class Specter
   class Scope
     def description
-      @description
+      @_description
     end
 
     def block
-      @block
+      @_block
     end
 
     def prepares
-      @prepares ||= []
+      @_prepares ||= []
     end
 
     def initialize(description = nil, &block)
-      @description = description
-      @block = block
+      @_description = description
+      @_block = block
     end
 
     def run
