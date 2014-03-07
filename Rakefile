@@ -8,6 +8,7 @@ desc 'Run gem specs'
 task :spec do
   specter = Specter.new
   specter.includes << 'spec/*.rb'
+  specter.excludes << 'spec/examples/**/*.rb'
   specter.run
 end
 
