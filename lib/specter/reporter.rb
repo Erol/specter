@@ -92,7 +92,7 @@ class Specter
       end
 
       if background
-        string += colorize("#{background - 10};49", SEPARATOR)
+        string += colorize("#{background - 10};#{Colors::DEFAULT.last}", SEPARATOR)
       end
 
       string
