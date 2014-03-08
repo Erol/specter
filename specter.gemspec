@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Specter::VERSION
   spec.authors       = ['Erol Fornoles']
   spec.email         = ['erol.fornoles@gmail.com']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ''
+  spec.summary       = %q{Specter}
+  spec.description   = %q{Minimal Spec Framework}
+  spec.homepage      = 'https://github.com/Erol/specter'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'clap', '~> 1.0'
 
-  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rake', '~> 10'
 end
