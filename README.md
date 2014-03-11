@@ -1,25 +1,5 @@
 # Specter
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'specter'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install specter
-
-## Usage
-
-TODO: Write usage instructions here
-
 ## Contributing
 
 1. Fork it ( http://github.com/<my-github-username>/specter/fork )
