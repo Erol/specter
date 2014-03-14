@@ -12,19 +12,23 @@ class Specter
       @_prepares ||= []
     end
 
+    def scopes
+      Specter.current[:scopes]
+    end
+
     def initialize(description = nil, &block)
       @_description = description
       @_block = block
     end
 
     def run
-      Specter.current[:scopes].push self
+      scopes.push self
 
       Specter.preserve block.binding do
         instance_eval(&block)
       end
 
-      Specter.current[:scopes].pop
+      scopes.pop
     end
   end
 end
