@@ -42,18 +42,26 @@ class Specter
                  exception.class
                end
 
-        puts
-        puts
-        puts powerline subject, Colors::SUBJECT, scope, Colors::SCOPE, spec, Colors::SPEC
-        puts
-        puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
-        puts "  #{colorize Colors::FAIL, exception.message}"
-        puts
-        puts "  #{colorize Colors::LINE, exception.backtrace.first}"
-        puts
+        fail subject, scope, spec, exception
       else
-        dot colorize Colors::PASS, DOT
+        pass
       end
+    end
+
+    def self.pass
+      dot colorize Colors::PASS, DOT
+    end
+
+    def self.fail(subject, scope, spec, exception)
+      puts
+      puts
+      puts powerline subject, Colors::SUBJECT, scope, Colors::SCOPE, spec, Colors::SPEC
+      puts
+      puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
+      puts "  #{colorize Colors::FAIL, exception.message}"
+      puts
+      puts "  #{colorize Colors::LINE, exception.backtrace.first}"
+      puts
     end
 
     def self.colorize(color, text)
