@@ -12,6 +12,10 @@ class Specter
       Specter.current[:scopes]
     end
 
+    def prepares
+      Specter.current[:prepares] + scopes.map(&:prepares).flatten
+    end
+
     def initialize(description, &block)
       @_description = description
       @_block = block
@@ -19,9 +23,6 @@ class Specter
 
     def prepare
       scope = scopes.last
-      prepares = []
-      prepares += Specter.current[:prepares]
-      prepares += Specter.current[:scopes].map(&:prepares).flatten
 
       prepares.each do |block|
         if scope
