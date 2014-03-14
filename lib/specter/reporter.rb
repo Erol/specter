@@ -73,7 +73,6 @@ class Specter
 
     def self.powerline(*args)
       string = ''
-
       background = nil
 
       until args.empty? do
@@ -82,19 +81,13 @@ class Specter
 
         next if text.empty?
 
-        if background
-          string += colorize("#{background - 10};#{colors.last}", SEPARATOR)
-        end
-
+        string += colorize("#{background - 10};#{colors.last}", SEPARATOR) if background
         string += colorize(colors.join(';'), " #{text} ")
 
         background = colors.last
       end
 
-      if background
-        string += colorize("#{background - 10};#{Colors::DEFAULT.last}", SEPARATOR)
-      end
-
+      string += colorize("#{background - 10};#{Colors::DEFAULT.last}", SEPARATOR) if background
       string
     end
   end
