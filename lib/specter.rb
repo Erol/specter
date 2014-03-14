@@ -113,9 +113,11 @@ module Kernel
   def expect(*args)
     expected = args.shift
     type = expected ? Specter::FailedAssert : Specter::FailedRefute
-    expression = args.shift
+
     backtrace = caller[0]
     backtrace = caller[1] if backtrace =~ /`assert'|`refute'/
+
+    expression = args.shift
 
     if args.empty?
       flunk "expected #{expected}: #{expression.inspect}", type, backtrace if !!expected ^ !!expression
