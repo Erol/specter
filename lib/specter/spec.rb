@@ -13,12 +13,12 @@ class Specter
       @_block = block
     end
 
-    def run
+    def prepare
       scope = Specter.current[:scopes].last
-
       prepares = []
       prepares += Specter.current[:prepares]
       prepares += Specter.current[:scopes].map(&:prepares).flatten
+
       prepares.each do |block|
         if scope
           scope.instance_eval(&block)
@@ -26,6 +26,10 @@ class Specter
           block.call
         end
       end
+    end
+
+    def run
+      prepare
 
       Specter.preserve block.binding do
         begin
