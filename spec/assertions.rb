@@ -33,7 +33,7 @@ end
 
 scope 'false expression' do
   spec 'fails with a message' do
-    raises Specter::FailedAssert, 'expected: nil is true' do
+    raises Specter::FailedAssert, 'expected true: nil' do
       assert nil
     end
   end
@@ -47,7 +47,7 @@ end
 
 scope 'false expression and predicate' do
   spec 'fails with a message' do
-    raises Specter::FailedAssert, 'expected: [1] is empty' do
+    raises Specter::FailedAssert, 'expected true: [1] is empty' do
       assert [1], :empty?
     end
   end
@@ -61,7 +61,7 @@ end
 
 scope 'operator is false for operands' do
   spec 'fails with a message' do
-    raises Specter::FailedAssert, 'expected: 2 == 1' do
+    raises Specter::FailedAssert, 'expected true: 2 == 1' do
       assert 2, :==, 1
     end
   end
@@ -79,7 +79,7 @@ end
 
 scope 'true expression' do
   spec 'fails with a message' do
-    raises Specter::FailedRefute, 'expected: true is false' do
+    raises Specter::FailedRefute, 'expected false: true' do
       refute true
     end
   end
@@ -93,7 +93,7 @@ end
 
 scope 'true expression and predicate' do
   spec 'fails with a message' do
-    raises Specter::FailedRefute, 'expected: [] is not empty' do
+    raises Specter::FailedRefute, 'expected false: [] is empty' do
       refute [], :empty?
     end
   end
@@ -107,7 +107,7 @@ end
 
 scope 'operator is true for operands' do
   spec 'fails with a message' do
-    raises Specter::FailedRefute, 'expected: not 1 == 1' do
+    raises Specter::FailedRefute, 'expected false: 1 == 1' do
       refute 1, :==, 1
     end
   end

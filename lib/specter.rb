@@ -103,43 +103,35 @@ module Kernel
   end
 
   def assert(*args)
-    expression = args.shift
-
-    if args.empty?
-      flunk "expected: #{expression.inspect} is true", Specter::FailedAssert unless expression
-      return
-    end
-
-    predicate = args.shift
-
-    if args.empty?
-      flunk "expected: #{expression.inspect} is #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedAssert unless expression.send predicate
-      return
-    end
-
-    operands = args
-
-    flunk "expected: #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", Specter::FailedAssert unless expression.send predicate, *operands
+    expect true, *args
   end
 
   def refute(*args)
+    expect false, *args
+  end
+
+  def expect(*args)
+    expected = args.shift
+    type = expected ? Specter::FailedAssert : Specter::FailedRefute
     expression = args.shift
+    backtrace = caller[0]
+    backtrace = caller[1] if backtrace =~ /`assert'|`refute'/
 
     if args.empty?
-      flunk "expected: #{expression.inspect} is false", Specter::FailedRefute if expression
+      flunk "expected #{expected}: #{expression.inspect}", type, backtrace if !!expected ^ !!expression
       return
     end
 
     predicate = args.shift
 
     if args.empty?
-      flunk "expected: #{expression.inspect} is not #{"#{predicate}".gsub(/\?$/, '')}", Specter::FailedRefute if expression.send predicate
+      flunk "expected #{expected}: #{expression.inspect} is #{"#{predicate}".gsub(/\?$/, '')}", type, backtrace if !!expected ^ !!expression.send(predicate)
       return
     end
 
     operands = args
 
-    flunk "expected: not #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", Specter::FailedRefute if expression.send predicate, *operands
+    flunk "expected #{expected}: #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", type, backtrace if !!expected ^ !!expression.send(predicate, *operands)
   end
 
   def raises(expected, message = nil)
@@ -154,9 +146,9 @@ module Kernel
     flunk "expected: raise #{expected.inspect}, got #{exception.inspect}", Specter::DifferentException if message && message != exception.message
   end
 
-  def flunk(message = nil, type = Specter::Flunked)
+  def flunk(message = nil, type = Specter::Flunked, backtrace = nil)
     exception = type.new message
-    exception.set_backtrace [caller[1]]
+    exception.set_backtrace [backtrace || caller[1]]
 
     raise exception
   end
