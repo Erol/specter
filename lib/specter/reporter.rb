@@ -61,7 +61,7 @@ class Specter
     end
 
     def self.colorize(color, text)
-      text = text.join("\n") if text.is_a? Array
+      text = text * "\n" if text.is_a? Array
 
       "\e[#{color}m#{text}\e[0m"
     end
