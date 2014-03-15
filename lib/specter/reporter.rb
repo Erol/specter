@@ -69,7 +69,7 @@ class Specter
     def self.code(backtrace)
       begin
         filename, line = backtrace.first.split(':')
-        "#{CODE[filename][line.to_i - 1].strip}"
+        CODE[filename][line.to_i - 1].strip
       rescue
         'N/A'
       end
