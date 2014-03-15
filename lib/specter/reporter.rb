@@ -85,7 +85,7 @@ class Specter
         next if text.empty?
 
         string += colorize("#{background - 10};#{colors.last}", SEPARATOR) if background
-        string += colorize(colors.join(';'), " #{text} ")
+        string += colorize(colors * ';', " #{text} ")
 
         background = colors.last
       end
