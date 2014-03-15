@@ -133,7 +133,7 @@ module Kernel
 
     operands = args
 
-    flunk "expected #{expected}: #{expression.inspect} #{predicate} #{operands.map(&:inspect).join(', ')}", type, backtrace if !!expected ^ !!expression.send(predicate, *operands)
+    flunk "expected #{expected}: #{expression.inspect} #{predicate} #{operands.map(&:inspect) * ', '}", type, backtrace if !!expected ^ !!expression.send(predicate, *operands)
   end
 
   def raises(expected, message = nil)
