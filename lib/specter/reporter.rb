@@ -35,7 +35,7 @@ class Specter
     def self.progress(values)
       if exception = values[:exception]
         subject = values[:subject]
-        scope = values[:scopes].map(&:description).join(" #{DOT} ")
+        scope = values[:scopes].map(&:description) * " #{DOT} "
         spec = values[:spec] ? values[:spec].description : exception.class
 
         fail subject, scope, spec, exception
