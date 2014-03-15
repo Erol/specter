@@ -36,11 +36,7 @@ class Specter
       if exception = values[:exception]
         subject = values[:subject]
         scope = values[:scopes].map(&:description).join(" #{DOT} ")
-        spec = if values[:spec]
-                 values[:spec].description
-               else
-                 exception.class
-               end
+        spec = values[:spec] ? values[:spec].description : exception.class
 
         fail subject, scope, spec, exception
       else
