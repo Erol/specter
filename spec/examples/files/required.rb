@@ -1,2 +1,4 @@
-puts 'This is a required file.'
-puts "Running: #{Specter.current[:file].filename}" if Specter.current[:file]
+filename = __FILE__.tap { |path| path.slice! Dir.pwd + '/' }
+
+puts "Load: #{filename}"
+puts "Run: #{filename}" if Specter.current[:file]
