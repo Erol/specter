@@ -1,2 +1,4 @@
-puts 'This is an excluded file.'
-puts "Running: #{Specter.current[:file].filename}"
+filename = __FILE__.tap { |path| path.slice! Dir.pwd + '/' }
+
+puts "Load: #{filename}"
+puts "Run: #{filename}" if Specter.current[:file]
