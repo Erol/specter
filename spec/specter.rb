@@ -7,30 +7,28 @@ def silent
   result
 end
 
-spec 'required files are loaded' do
+spec 'load required files' do
   output = %x{./bin/specter -r spec/examples/files/required.rb spec/examples/files/*.rb}
 
-  assert output, :include?, 'This is a required file.'
+  assert output, :include?, 'Load: spec/examples/files/required.rb'
 end
 
-spec 'required files are not ran' do
+spec 'do not run required files' do
   output = %x{./bin/specter -r spec/examples/files/required.rb spec/examples/files/*.rb}
 
-  refute output, :include?, 'Running: spec/examples/files/required.rb'
+  refute output, :include?, 'Run: spec/examples/files/required.rb'
 end
 
-spec 'included files are ran' do
+spec 'run included files' do
   output = %x{./bin/specter spec/examples/files/*.rb}
 
-  assert output, :include?, 'This is an included file.'
-  assert output, :include?, 'Running: spec/examples/files/included.rb'
+  assert output, :include?, 'Run: spec/examples/files/included.rb'
 end
 
-spec 'excluded files are not ran' do
+spec 'do not run excluded files' do
   output = %x{./bin/specter -e spec/examples/files/excluded.rb spec/examples/files/*.rb}
 
-  refute output, :include?, 'This is an excluded file.'
-  refute output, :include?, 'Running: spec/examples/files/excluded.rb'
+  refute output, :include?, 'Run: spec/examples/files/excluded.rb'
 end
 
 spec '#run returns a true value if none of the spec files failed' do
