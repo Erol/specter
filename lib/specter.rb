@@ -95,10 +95,10 @@ module Kernel
 
   def prepare(&block)
     prepares = if scope = Specter.current[:scopes].last
-      scope.prepares
-    else
-      Specter.current[:prepares]
-    end
+                 scope.prepares
+               else
+                 Specter.current[:prepares]
+               end
     prepares.push block
   end
 
