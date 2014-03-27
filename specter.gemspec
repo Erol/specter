@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Specter::VERSION
   spec.authors       = ['Erol Fornoles']
   spec.email         = ['erol.fornoles@gmail.com']
-  spec.summary       = %q{Specter}
-  spec.description   = %q{Minimal Spec Framework}
+  spec.summary       = %q{Isolated specs in Ruby}
+  spec.description   = %q{Isolated specs in Ruby}
   spec.homepage      = 'https://github.com/Erol/specter'
   spec.license       = 'MIT'
 
