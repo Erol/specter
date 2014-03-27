@@ -53,7 +53,7 @@ class Specter
       puts
       puts powerline subject, Colors::SUBJECT, scope, Colors::SCOPE, spec, Colors::SPEC
       puts
-      puts "  #{colorize Colors::FAIL, code(exception.backtrace)}"
+      puts "  #{colorize Colors::FAIL, code(exception.backtrace.first)}"
       puts "  #{colorize Colors::FAIL, exception.message}"
       puts
       puts "  #{colorize Colors::LINE, exception.backtrace.first}"
@@ -66,9 +66,9 @@ class Specter
       "\e[#{color}m#{text}\e[0m"
     end
 
-    def self.code(backtrace)
+    def self.code(reference)
       begin
-        filename, line = backtrace.first.split(':')
+        filename, line = reference.split(':')
         CODE[filename][line.to_i - 1].strip
       rescue
         'N/A'
