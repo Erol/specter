@@ -34,11 +34,12 @@ class Specter
 
     def self.progress(values)
       if exception = values[:exception]
+        filename = values[:file].filename
         subject = values[:subject]
         scope = values[:scopes].map(&:description) * " #{DOT} "
         spec = values[:spec] ? values[:spec].description : exception.class
 
-        fail subject, scope, spec, exception
+        fail filename, subject, scope, spec, exception
       else
         pass
       end
@@ -48,7 +49,7 @@ class Specter
       dot colorize Colors::PASS, DOT
     end
 
-    def self.fail(subject, scope, spec, exception)
+    def self.fail(filename, subject, scope, spec, exception)
       puts
       puts
       puts powerline subject, Colors::SUBJECT, scope, Colors::SCOPE, spec, Colors::SPEC
