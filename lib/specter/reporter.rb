@@ -57,9 +57,7 @@ class Specter
       puts "  #{colorize Colors::FAIL, code(exception.backtrace.first)}"
       puts "  #{colorize Colors::FAIL, exception.message}"
       puts
-
-      trace filename, exception.backtrace
-
+      puts colorize Colors::LINE, trace(filename, exception.backtrace)
       puts
     end
 
@@ -79,13 +77,12 @@ class Specter
     end
 
     def self.trace(filename, backtrace)
-      lines = if pivot = backtrace.index { |line| line.match filename }
-                backtrace[0..pivot].reverse.map { |line| '  ' + line }
-              else
-                ['  ' + backtrace.first]
-              end
-
-      puts colorize Colors::LINE, lines
+      if pivot = backtrace.index { |line| line.match filename }
+        root = Regexp.new "^#{Dir.pwd}/"
+        backtrace[0..pivot].reverse.map { |line| '  ' + line.gsub(root, '') }
+      else
+        ['  ' + backtrace.first]
+      end
     end
 
     def self.powerline(*args)
