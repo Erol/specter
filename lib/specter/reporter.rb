@@ -80,9 +80,9 @@ class Specter
 
     def self.trace(filename, backtrace)
       lines = if pivot = backtrace.index { |line| line.match filename }
-                backtrace[0..pivot].reverse.map { |line| "  " + line }
+                backtrace[0..pivot].reverse.map { |line| '  ' + line }
               else
-                [" " + backtrace.first]
+                ['  ' + backtrace.first]
               end
 
       puts colorize Colors::LINE, lines
