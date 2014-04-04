@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/Erol/specter.png)](https://codeclimate.com/github/Erol/specter)
+
 # Specter
 
 ## Contributing
