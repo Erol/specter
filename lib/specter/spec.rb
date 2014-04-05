@@ -24,9 +24,7 @@ class Specter
     def prepare
       scope = scopes.last
 
-      prepares.each do |block|
-        scope ? scope.instance_eval(&block) : block.call
-      end
+      prepares.each { |block| scope ? scope.instance_eval(&block) : block.call }
     end
 
     def run
