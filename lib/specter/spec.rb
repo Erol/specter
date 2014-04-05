@@ -25,11 +25,7 @@ class Specter
       scope = scopes.last
 
       prepares.each do |block|
-        if scope
-          scope.instance_eval(&block)
-        else
-          block.call
-        end
+        scope ? scope.instance_eval(&block) : block.call
       end
     end
 
