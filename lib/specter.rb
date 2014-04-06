@@ -57,7 +57,7 @@ class Specter
   end
 
   def run
-    Specter.current.store :specter, self
+    Specter.now.specter = self
 
     requires.each do |filename|
       require ::File.join Dir.pwd, filename
@@ -73,7 +73,7 @@ class Specter
 
     Specter::Reporter.finish
 
-    Specter.current.delete :specter
+    Specter.now.specter = nil
 
     statuses.all?
   end
@@ -83,7 +83,7 @@ module Kernel
   private
 
   def subject(subject)
-    Specter.current.store :subject, subject
+    Specter.now.subject = subject
   end
 
   def scope(description = nil, &block)
@@ -95,12 +95,7 @@ module Kernel
   end
 
   def prepare(&block)
-    prepares = if scope = Specter.current[:scopes].last
-                 scope.prepares
-               else
-                 Specter.current[:prepares]
-               end
-    prepares.push block
+    Specter.now.scopes.prepares.push block
   end
 
   def assert(*args)
