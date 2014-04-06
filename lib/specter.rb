@@ -80,7 +80,7 @@ module Kernel
   end
 
   def prepare(&block)
-    Specter.now.scopes.prepares.push block
+    Specter.now.scopes.last.prepares.push block
   end
 
   def assert(*args)
