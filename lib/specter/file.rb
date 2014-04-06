@@ -47,14 +47,14 @@ class Specter
     end
 
     def pass
-      values = {file: Specter.current[:file], subject: Specter.current[:subject], scopes: Specter.current[:scopes], spec: Specter.current[:spec]}
+      values = {file: Specter.now.file, subject: Specter.now.subject, scopes: Specter.now.scopes, spec: Specter.now.spec}
       passed << values
 
       Specter::Reporter.progress values
     end
 
     def fail(exception)
-      values = {file: Specter.current[:file], subject: Specter.current[:subject], scopes: Specter.current[:scopes], spec: Specter.current[:spec], exception: exception}
+      values = {file: Specter.now.file, subject: Specter.now.subject, scopes: Specter.now.scopes, spec: Specter.now.spec, exception: exception}
       failed << values
 
       Specter::Reporter.progress values
