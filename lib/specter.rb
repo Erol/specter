@@ -21,10 +21,6 @@ class Specter
     Thread.current[:now] ||= Specter::Context.new scopes: []
   end
 
-  def self.current
-    Thread.current[:specter] ||= {scopes: [], prepares: []}
-  end
-
   def self.preserve(binding)
     locals = {}
 
