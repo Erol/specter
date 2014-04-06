@@ -20,9 +20,7 @@ class Specter
     def run
       Specter.now.scopes.push self
 
-      Specter.preserve block.binding do
-        instance_eval(&block)
-      end
+      instance_eval(&block)
 
       Specter.now.scopes.pop
     end

@@ -30,19 +30,17 @@ class Specter
     def run
       prepare
 
-      Specter.preserve block.binding do
-        begin
-          Specter.now.spec = self
+      begin
+        Specter.now.spec = self
 
-          block.call
-          pass
+        block.call
+        pass
 
-        rescue StandardError => exception
-          fail exception
+      rescue StandardError => exception
+        fail exception
 
-        ensure
-          Specter.now.spec = nil
-        end
+      ensure
+        Specter.now.spec = nil
       end
     end
 

@@ -21,21 +21,6 @@ class Specter
     Thread.current[:now] ||= Specter::Context.new scopes: []
   end
 
-  def self.preserve(binding)
-    locals = {}
-
-    vars = binding.send :eval, 'local_variables'
-    vars.each do |local|
-      locals[local] = binding.send :eval, "Marshal.dump #{local}"
-    end
-
-    yield
-
-    locals.each do |local, value|
-      binding.send :eval, "#{local} = Marshal.load #{value.inspect}"
-    end
-  end
-
   def requires
     @_requires ||= []
   end
