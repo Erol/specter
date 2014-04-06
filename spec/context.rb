@@ -20,3 +20,9 @@ spec 'return value for an existing attribute' do
 
   assert context.name, :==, 'Apple'
 end
+
+spec 'return nil for a non-existing attribute' do
+  context = Specter::Context.new
+
+  assert context.name, :nil?
+end
