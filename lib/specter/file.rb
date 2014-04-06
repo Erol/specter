@@ -28,14 +28,20 @@ class Specter
       fork do
         begin
           Specter.current.store :file, self
+          Specter.now.file = self
 
-          load filename
+          filename = name
+
+          Specter::Scope.new filename do
+            load filename
+          end.run
 
         rescue Exception => exception
           fail exception
 
         ensure
           Specter.current.delete :file
+          Specter.now.file = nil
 
           exit 1 if failed?
         end

@@ -18,7 +18,7 @@ class Specter
   class DifferentException < Flunked; end
 
   def self.now
-    Thread.current[:now] ||= Specter::Context.new
+    Thread.current[:now] ||= Specter::Context.new scopes: []
   end
 
   def self.current
