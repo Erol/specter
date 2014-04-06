@@ -1,51 +1,41 @@
 prepare do
-  @value = 1
+  $file = true
 end
 
-spec 'prepare blocks are called for this spec' do
-  assert @value, :==, 1
+prepare do
+  $first = false
 end
 
-spec 'change value' do
-  @value = 2
+prepare do
+  $second = false
 end
 
-spec 'prepare blocks are called again for this spec' do
-  assert @value, :==, 1
+spec 'call prepare blocks in file level scope only' do
+  assert $file, :==, true
+  assert $first, :==, false
+  assert $second, :==, false
 end
 
-scope do
-  spec 'prepare blocks are called for this spec inside a scope' do
-    assert @value, :==, 1
-  end
-
-  spec 'change value' do
-    @value = 2
-  end
-
-  spec 'prepare blocks are called again for this spec inside a scope' do
-    assert @value, :==, 1
-  end
-end
-
-scope do
+scope 'first level scope' do
   prepare do
-    @value = 3
+    $first = true
   end
 
-  spec 'prepare blocks inside the scope are called for this spec inside the scope' do
-    assert @value, :==, 3
+  spec 'call prepare blocks from file level scope to first level scope' do
+    assert $file, :==, true
+    assert $first, :==, true
+    assert $second, :==, false
   end
 
-  spec 'change value' do
-    @value = 2
-  end
+  scope 'second level scope' do
+    prepare do
+      $second = true
+    end
 
-  spec 'prepare blocks inside the scope are called again for this spec inside the scope' do
-    assert @value, :==, 3
+    spec 'call prepare blocks from file level scope to second level scope' do
+      assert $file, :==, true
+      assert $first, :==, true
+      assert $second, :==, true
+    end
   end
-end
-
-spec 'prepare blocks outside the scope are not called for this spec' do
-  assert @value, :==, 1
 end

@@ -1,27 +1,30 @@
-@outside = 'outside'
+spec 'run in file level scope' do
+  file = Specter.now.file
+  scopes = Specter.now.scopes
 
-scope 'a scope' do
-  @inside = 'inside'
-
-  spec 'instance variables outside the scope are undefined' do
-    refute defined? @outside
-  end
-
-  spec 'instance variables inside the scope are defined' do
-    assert defined? @inside
-  end
+  assert scopes.size, :==, 1
+  assert scopes[0].description, :==, file.name
 end
 
-scope 'another scope' do
-  spec 'instance variables inside a different scope are undefined' do
-    refute defined? @inside
+scope 'first level scope' do
+  spec 'run in first level scope' do
+    file = Specter.now.file
+    scopes = Specter.now.scopes
+
+    assert scopes.size, :==, 2
+    assert scopes[0].description, :==, file.name
+    assert scopes[1].description, :==, 'first level scope'
   end
-end
 
-spec 'instance variables outside a scope are defined' do
-  assert defined? @outside
-end
+  scope 'second level scope' do
+    spec 'run in second level scope' do
+      file = Specter.now.file
+      scopes = Specter.now.scopes
 
-spec 'instance variables inside a scope are undefined' do
-  refute defined? @inside
+      assert scopes.size, :==, 3
+      assert scopes[0].description, :==, file.name
+      assert scopes[1].description, :==, 'first level scope'
+      assert scopes[2].description, :==, 'second level scope'
+    end
+  end
 end

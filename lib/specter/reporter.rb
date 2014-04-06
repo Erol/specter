@@ -20,7 +20,7 @@ class Specter
     end
 
     def self.finish
-      times = Specter.current[:specter].runtimes
+      times = Specter.now.specter.runtimes
 
       puts
       puts
@@ -34,7 +34,7 @@ class Specter
 
     def self.progress(values)
       if exception = values[:exception]
-        filename = values[:file].filename
+        filename = values[:file].name
         subject = values[:subject]
         scope = values[:scopes].map(&:description) * " #{DOT} "
         spec = values[:spec] ? values[:spec].description : exception.class

@@ -9,11 +9,11 @@ class Specter
     end
 
     def scopes
-      Specter.current[:scopes]
+      Specter.now.scopes
     end
 
     def prepares
-      Specter.current[:prepares] + scopes.map(&:prepares).flatten
+      scopes.map(&:prepares).flatten
     end
 
     def initialize(description, &block)
@@ -24,34 +24,32 @@ class Specter
     def prepare
       scope = scopes.last
 
-      prepares.each { |block| scope ? scope.instance_eval(&block) : block.call }
+      prepares.each { |block| scope.instance_eval(&block) }
     end
 
     def run
       prepare
 
-      Specter.preserve block.binding do
-        begin
-          Specter.current.store :spec, self
+      begin
+        Specter.now.spec = self
 
-          block.call
-          pass
+        block.call
+        pass
 
-        rescue StandardError => exception
-          fail exception
+      rescue StandardError => exception
+        fail exception
 
-        ensure
-          Specter.current.delete :spec
-        end
+      ensure
+        Specter.now.spec = nil
       end
     end
 
     def pass
-      Specter.current[:file].pass
+      Specter.now.file.pass
     end
 
     def fail(exception)
-      Specter.current[:file].fail exception
+      Specter.now.file.fail exception
     end
   end
 end

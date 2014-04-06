@@ -3,6 +3,7 @@ require 'specter/version'
 require 'benchmark'
 require 'clap'
 
+require 'specter/context'
 require 'specter/file'
 require 'specter/scope'
 require 'specter/spec'
@@ -16,23 +17,8 @@ class Specter
   class MissingException < Flunked; end
   class DifferentException < Flunked; end
 
-  def self.current
-    Thread.current[:specter] ||= {scopes: [], prepares: []}
-  end
-
-  def self.preserve(binding)
-    locals = {}
-
-    vars = binding.send :eval, 'local_variables'
-    vars.each do |local|
-      locals[local] = binding.send :eval, "Marshal.dump #{local}"
-    end
-
-    yield
-
-    locals.each do |local, value|
-      binding.send :eval, "#{local} = Marshal.load #{value.inspect}"
-    end
+  def self.now
+    Thread.current[:now] ||= Specter::Context.new scopes: []
   end
 
   def requires
@@ -56,7 +42,7 @@ class Specter
   end
 
   def run
-    Specter.current.store :specter, self
+    Specter.now.specter = self
 
     requires.each do |filename|
       require ::File.join Dir.pwd, filename
@@ -72,7 +58,7 @@ class Specter
 
     Specter::Reporter.finish
 
-    Specter.current.delete :specter
+    Specter.now.specter = nil
 
     statuses.all?
   end
@@ -82,7 +68,7 @@ module Kernel
   private
 
   def subject(subject)
-    Specter.current.store :subject, subject
+    Specter.now.subject = subject
   end
 
   def scope(description = nil, &block)
@@ -94,12 +80,7 @@ module Kernel
   end
 
   def prepare(&block)
-    prepares = if scope = Specter.current[:scopes].last
-                 scope.prepares
-               else
-                 Specter.current[:prepares]
-               end
-    prepares.push block
+    Specter.now.scopes.last.prepares.push block
   end
 
   def assert(*args)
