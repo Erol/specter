@@ -3,6 +3,7 @@ require 'specter/version'
 require 'benchmark'
 require 'clap'
 
+require 'specter/context'
 require 'specter/file'
 require 'specter/scope'
 require 'specter/spec'
@@ -15,6 +16,10 @@ class Specter
   class FailedRefute < Flunked; end
   class MissingException < Flunked; end
   class DifferentException < Flunked; end
+
+  def self.now
+    Thread.current[:now] ||= Specter::Context.new
+  end
 
   def self.current
     Thread.current[:specter] ||= {scopes: [], prepares: []}

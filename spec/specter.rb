@@ -7,6 +7,10 @@ def silent
   result
 end
 
+spec '.now returns the current context' do
+  assert Specter.now, :is_a?, Specter::Context
+end
+
 spec '#run returns a true value if none of the spec files failed' do
   status = silent do
     specter = Specter.new
