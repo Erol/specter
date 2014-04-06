@@ -20,7 +20,7 @@ class Specter
     end
 
     def self.finish
-      times = Specter.current[:specter].runtimes
+      times = Specter.now.specter.runtimes
 
       puts
       puts
