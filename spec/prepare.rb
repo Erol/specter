@@ -26,4 +26,16 @@ scope 'first level scope' do
     assert $first, :==, true
     assert $second, :==, false
   end
+
+  scope 'second level scope' do
+    prepare do
+      $second = true
+    end
+
+    spec 'call prepare blocks from file level scope to second level scope' do
+      assert $file, :==, true
+      assert $first, :==, true
+      assert $second, :==, true
+    end
+  end
 end
