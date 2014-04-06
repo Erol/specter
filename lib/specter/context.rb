@@ -7,7 +7,15 @@ class Specter
     end
 
     def method_missing(method, *args, &block)
-      @_attributes[method]
+      attr = String method
+
+      if attr =~ /=$/
+        attr.gsub!(/=$/, '')
+
+        @_attributes[:"#{attr}"] = args.shift
+      else
+        @_attributes[:"#{attr}"]
+      end
     end
 
     def respond_to_missing?(method, private = false)

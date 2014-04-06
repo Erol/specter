@@ -13,3 +13,10 @@ spec '.new accepts a hash of attributes' do
 
   assert context.name, :==, 'Apple'
 end
+
+spec 'return value for an existing attribute' do
+  context = Specter::Context.new
+  context.name = 'Apple'
+
+  assert context.name, :==, 'Apple'
+end
