@@ -27,7 +27,6 @@ class Specter
     def run
       fork do
         begin
-          Specter.current.store :file, self
           Specter.now.file = self
 
           filename = name
@@ -40,7 +39,6 @@ class Specter
           fail exception
 
         ensure
-          Specter.current.delete :file
           Specter.now.file = nil
 
           exit 1 if failed?
