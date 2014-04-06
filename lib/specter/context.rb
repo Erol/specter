@@ -2,6 +2,8 @@ class Specter
   class Context
     def initialize(attributes = {})
       @_attributes = {}
+
+      attributes.each { |k, v| @_attributes[k] = v }
     end
 
     def method_missing(method, *args, &block)
