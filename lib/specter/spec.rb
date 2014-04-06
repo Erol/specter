@@ -8,23 +8,14 @@ class Specter
       @_block
     end
 
-    def scopes
-      Specter.now.scopes
-    end
-
-    def prepares
-      scopes.map(&:prepares).flatten
-    end
-
     def initialize(description, &block)
       @_description = description
       @_block = block
     end
 
     def prepare
-      scope = scopes.last
-
-      prepares.each { |block| scope.instance_eval(&block) }
+      prepares = Specter.now.scopes.map(&:prepares).flatten
+      prepares.each { |block| instance_eval(&block) }
     end
 
     def run
