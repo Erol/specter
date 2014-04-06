@@ -1,11 +1,11 @@
 class Specter
   class File
-    def filename
-      @_filename
+    def name
+      @_name
     end
 
-    def initialize(filename)
-      @_filename = filename
+    def initialize(name)
+      @_name = name
     end
 
     def passed
