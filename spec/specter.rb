@@ -40,25 +40,3 @@ subject Specter
 spec 'subject is set' do
   assert Specter.current[:subject]
 end
-
-subject 'Specter local variables'
-
-variable = {value: 1}
-
-scope do
-  variable[:value] = 2
-
-  spec 'changes inside the current spec are allowed' do
-    variable[:value] = 3
-
-    assert variable[:value], :==, 3
-  end
-
-  spec 'changes outside the current spec are discarded' do
-    assert variable[:value], :==, 2
-  end
-end
-
-spec 'changes outside the current scope are discarded' do
-  assert variable[:value], :==, 1
-end
