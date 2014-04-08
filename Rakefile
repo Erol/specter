@@ -9,7 +9,10 @@ task :spec do
   specter = Specter.new
   specter.includes << 'spec/*.rb'
   specter.excludes << 'spec/examples/**/*.rb'
-  specter.run
+
+  success = specter.run
+
+  exit 1 unless success
 end
 
 task :default => :spec
