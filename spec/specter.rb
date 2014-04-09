@@ -22,6 +22,19 @@ spec '#filenames include patterns matching #includes' do
   assert filenames, :include?, 'spec/examples/files/required.rb'
 end
 
+spec '#filenames exclude patterns matching #excludes' do
+  specter = Specter.new
+  specter.includes << 'spec/examples/files/*.rb'
+  specter.excludes << 'spec/examples/files/excluded.rb'
+
+  filenames = specter.filenames
+
+  assert filenames, :include?, 'spec/examples/files/included.rb'
+  assert filenames, :include?, 'spec/examples/files/required.rb'
+
+  refute filenames, :include?, 'spec/examples/files/excluded.rb'
+end
+
 spec '#run returns a true value if none of the spec files failed' do
   status = silent do
     specter = Specter.new
