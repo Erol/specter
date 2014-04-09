@@ -11,6 +11,17 @@ spec '.now returns the current context' do
   assert Specter.now, :is_a?, Specter::Context
 end
 
+spec '#filenames include patterns matching #includes' do
+  specter = Specter.new
+  specter.includes << 'spec/examples/files/*.rb'
+
+  filenames = specter.filenames
+
+  assert filenames, :include?, 'spec/examples/files/included.rb'
+  assert filenames, :include?, 'spec/examples/files/excluded.rb'
+  assert filenames, :include?, 'spec/examples/files/required.rb'
+end
+
 spec '#run returns a true value if none of the spec files failed' do
   status = silent do
     specter = Specter.new
