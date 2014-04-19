@@ -19,3 +19,7 @@ scope 'first level scope' do
     assert given.first
   end
 end
+
+spec 'givens from first level scope are undefined' do |given|
+  refute given.first
+end
