@@ -4,6 +4,10 @@ class Specter
       @_description
     end
 
+    def given
+      @_context ||= Specter::Context.new
+    end
+
     def block
       @_block
     end
@@ -15,7 +19,7 @@ class Specter
 
     def prepare
       prepares = Specter.now.scopes.map(&:prepares).flatten
-      prepares.each { |block| instance_eval(&block) }
+      prepares.each { |block| instance_exec given, &block }
     end
 
     def run
@@ -24,7 +28,7 @@ class Specter
       begin
         Specter.now.spec = self
 
-        block.call
+        block.call given
         pass
 
       rescue StandardError => exception
