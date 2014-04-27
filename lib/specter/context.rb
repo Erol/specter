@@ -9,8 +9,10 @@ class Specter
     def method_missing(method, *args, &block)
       attr = String method
 
-      if attr =~ /=$/
-        attr.gsub!(/=$/, '')
+      setter = Regexp.new '=$'
+
+      if setter.match attr
+        attr.gsub! setter, ''
 
         @_attributes[:"#{attr}"] = args.shift
       else
