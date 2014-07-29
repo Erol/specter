@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/Erol/specter.png)](https://codeclimate.com/github/Erol/specter)
+[![Code Climate Score](http://img.shields.io/codeclimate/github/Erol/specter.svg?style=flat)](https://codeclimate.com/github/Erol/specter)
 
 # Specter
 
