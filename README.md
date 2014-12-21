@@ -2,6 +2,8 @@
 
 # Specter
 
+NOTE: Deprecated in favor of [Microspec](https://github.com/Erol/microspec).
+
 ## Contributing
 
 1. Fork it
