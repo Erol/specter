@@ -2,7 +2,7 @@
 
 # Specter
 
-NOTE: Deprecated in favor of [Microspec](https://github.com/Erol/microspec).
+**NOTE: Deprecated in favor of [Microspec](https://github.com/Erol/microspec).**
 
 ## Contributing
 
